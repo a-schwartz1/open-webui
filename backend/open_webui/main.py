@@ -23,6 +23,9 @@ import anyio.to_thread
 import requests
 from redis import Redis
 
+__import__('pysqlite3')
+# import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 from fastapi import (
     Depends,

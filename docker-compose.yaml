@@ -7,6 +7,15 @@ services:
     tty: true
     restart: unless-stopped
     image: ollama/ollama:${OLLAMA_DOCKER_TAG-latest}
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: ${OLLAMA_GPU_DRIVER-nvidia}
+              count: ${OLLAMA_GPU_COUNT-1}
+              capabilities:
+                - gpu
 
   open-webui:
     build:
@@ -21,12 +30,21 @@ services:
     depends_on:
       - ollama
     ports:
-      - ${OPEN_WEBUI_PORT-3000}:8080
+      - ${OPEN_WEBUI_PORT-3001}:8080
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
       - 'WEBUI_SECRET_KEY='
     extra_hosts:
       - host.docker.internal:host-gateway
+    restart: unless-stopped
+
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    volumes:
+      - ./mcpo.json:/mcpo.json
+    ports:
+      - 8005:8005
+    command: --port 8005 --config /mcpo.json
     restart: unless-stopped
 
 volumes:
