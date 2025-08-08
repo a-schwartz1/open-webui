@@ -2,7 +2,7 @@ services:
   ollama:
     volumes:
       - ollama:/root/.ollama
-    container_name: ollama
+    container_name: ollama-local
     pull_policy: always
     tty: true
     restart: unless-stopped
@@ -24,7 +24,7 @@ services:
         OLLAMA_BASE_URL: '/ollama'
       dockerfile: Dockerfile
     image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
-    container_name: open-webui
+    container_name: open-webui-local
     volumes:
       - open-webui:/app/backend/data
     depends_on:
@@ -34,17 +34,19 @@ services:
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
       - 'WEBUI_SECRET_KEY='
+    gpus: all
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
 
   mcpo:
     image: ghcr.io/open-webui/mcpo:main
+    container_name: mcpo-local
     volumes:
       - ./mcpo.json:/mcpo.json
     ports:
       - 8005:8005
-    command: --port 8005 --config /mcpo.json
+    command: --port 8005 --config /mcpo.json --hot-reload
     restart: unless-stopped
 
 volumes:

@@ -8,9 +8,28 @@ docker compose -f docker-compose.yaml -p open-webui-local up
 
 [For more installation options](#how-to-install-)
 
+---
+[MCPO docs](https://docs.openwebui.com/openapi-servers/mcp)
 
+Example `mcpo.json` file:
 
+```json
+"mcpServers": {   
+  "time": {     
+    "command": "uvx",     
+    "args": ["mcp-server-time", "--local-timezone=America/New_York"]   
+  } 
+}
+```
 
+As soon as it starts, the MCP Proxy (mcpo) automatically:  
+Discovers MCP tools dynamically and generates REST endpoints and creates interactive, human-readable OpenAPI documentation accessible at: `http://localhost:8000/docs`
+
+[Reference and Official third-party MCP Servers](https://github.com/modelcontextprotocol/servers)
+
+After building MCPO and sourcing MCP servers, connect them to Open WebUI.
+
+[Open WebUI Tool Server Integration](https://docs.openwebui.com/openapi-servers/open-webui/)
 
 
 
@@ -25,6 +44,8 @@ docker compose -f docker-compose.yaml -p open-webui-local up
 ![GitHub last commit](https://img.shields.io/github/last-commit/open-webui/open-webui?color=red)
 [![Discord](https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white)](https://discord.gg/5rJgQTnV4s)
 [![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/tjbck)
+
+admin admin
 
 **Open WebUI is an [extensible](https://docs.openwebui.com/features/plugin/), feature-rich, and user-friendly self-hosted AI platform designed to operate entirely offline.** It supports various LLM runners like **Ollama** and **OpenAI-compatible APIs**, with **built-in inference engine** for RAG, making it a **powerful AI deployment solution**.
 
