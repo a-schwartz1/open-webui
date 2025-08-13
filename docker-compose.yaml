@@ -27,10 +27,11 @@ services:
     container_name: open-webui-local
     volumes:
       - open-webui:/app/backend/data
+      # - ./test.db:/test.db
     depends_on:
       - ollama
     ports:
-      - ${OPEN_WEBUI_PORT-3001}:8080
+      - ${OPEN_WEBUI_PORT-3000}:8080
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
       - 'WEBUI_SECRET_KEY='
@@ -45,8 +46,8 @@ services:
     volumes:
       - ./mcpo.json:/mcpo.json
     ports:
-      - 8005:8005
-    command: --port 8005 --config /mcpo.json --hot-reload
+      - 8000:8000
+    command: --port 8000 --config /mcpo.json #--hot-reload
     restart: unless-stopped
 
 volumes:

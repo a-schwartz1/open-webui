@@ -3,7 +3,7 @@
 To install Open WebUI with Ollama and MCPO support
 
 ```bash
-docker compose -f docker-compose.yaml -p open-webui-local2 up
+docker compose -f docker-compose.yaml -p open-webui-local up
 ```
 
 [For more installation options](#how-to-install-)
@@ -30,6 +30,8 @@ Discovers MCP tools dynamically and generates REST endpoints and creates interac
 After building MCPO and sourcing MCP servers, connect them to Open WebUI.
 
 [Open WebUI Tool Server Integration](https://docs.openwebui.com/openapi-servers/open-webui/)
+
+Open WebUI will be accessible at: `http://localhost:3000`
 
 Open WebUI Tools can be registered either by the User or Globally by an admin.  
 User tools are requested directly from your browser and are accessed through Localhost. Global tools
