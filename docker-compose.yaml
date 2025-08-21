@@ -1,7 +1,10 @@
 services:
   ollama:
+    # environment:
+    #   - OLLAMA_MODELS=/root/.ollama/models
     volumes:
       - ollama:/root/.ollama
+      # - /media/adam/DATA/ollama/models:${OLLAMA_MODELS} # to keep models outside container
     container_name: ollama-local
     pull_policy: always
     tty: true
@@ -45,9 +48,10 @@ services:
     container_name: mcpo-local
     volumes:
       - ./mcpo.json:/mcpo.json
+      - ./test.db:/test.db
     ports:
-      - 8000:8000
-    command: --port 8000 --config /mcpo.json #--hot-reload
+      - 8005:8005
+    command: --port 8005 --config /mcpo.json #--hot-reload
     restart: unless-stopped
 
 volumes:

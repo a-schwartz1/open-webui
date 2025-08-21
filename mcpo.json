@@ -10,7 +10,11 @@
         },
         "sqlite": {
             "command": "uvx",
-            "args": ["mcp-server-sqlite", "--db-path", "test.db"]
+            "args": ["mcp-server-sqlite", "--db-path", "/test.db"]
+        },
+        "sqlite2": {
+            "command": "npx",
+            "args": ["-y", "@executeautomation/database-server", "/test.db"]
         }
     }
 }
